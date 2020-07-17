@@ -143,6 +143,8 @@ class UnityEnv(gym.Env):
         if self.use_visual:
             self.visual_obs = info.visual_observations
             default_observation = self.visual_obs
+            if len(info.vector_observations[0]) > 0:
+                default_observation.append(info.vector_observations)
         else:
             default_observation = info.vector_observations
         return list(default_observation), info.rewards,  info.local_done, {"text_observation": info.text_observations,
